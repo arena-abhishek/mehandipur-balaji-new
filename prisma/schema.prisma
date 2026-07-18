@@ -1,0 +1,408 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String    @id @default(cuid())
+  name                  String?
+  email                 String?   @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String?
+  passwordResetToken    String?   @unique
+  passwordResetTokenExp DateTime?
+  role                  String?   @default("user")
+  isVerified            Boolean   @default(false)
+  otp                   String?
+  otpExpiresAt          DateTime?
+  phone                 String?
+  createdAt             DateTime? @default(now())
+  updatedAt             DateTime? @updatedAt
+  accounts              Account[]
+  order                 Order[]
+  sessions              Session[]
+}
+
+model Order {
+  id             Int         @id @default(autoincrement())
+  userId         String
+  amount         Decimal
+  discount       Decimal?
+  couponCode     String?
+  status         String      @default("pending")
+  paymentGateway String
+  transactionId  String?     @unique
+  referenceId    String?     @unique
+  paymentStatus  String?     @default("initiated")
+  paymentMethod  String?
+  paymentDate    DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  booking_date   DateTime?   @default(now())
+  city           String?
+  country        String?
+  delivery_date  DateTime?   @default(now())
+  email          String?
+  name           String?
+  phone          String?
+  state          String?
+  emailSent      Boolean     @default(false) // ✅ New field to track email status
+
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderItems     OrderItem[]
+   @@index([userId], map: "Order_userId_fkey")
+}
+
+model OrderItem {
+  id          Int      @id @default(autoincrement())
+  orderId     Int
+  categoryId  String
+  productName String
+  quantity    Int
+  price       Decimal
+  totalAmount Decimal
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId], map: "OrderItem_categoryId_fkey")
+  @@index([orderId], map: "OrderItem_orderId_fkey")
+}
+
+model FAQ {
+  id        Int      @id @default(autoincrement())
+  questions String
+  answer    String   @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Int      @default(1)
+}
+
+model Lead {
+  id             String       @id @default(cuid())
+  name           String
+  email          String?
+  phone          String       @unique
+  message        String?
+  status         String       @default("new")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  mainCategoryId String
+  mainCategory   MainCategory @relation(fields: [mainCategoryId], references: [id])
+  logs           LeadLog[]
+
+  @@index([mainCategoryId], map: "Lead_mainCategoryId_fkey")
+}
+
+model MainCategory {
+  id              String     @id @default(cuid())
+  name            String
+  image           String
+  slug            String     @unique
+  content         String?    @db.LongText
+  status          Int        @default(1)
+  views           Int        @default(0)
+  likes           Int        @default(0)
+  icon            String?    @db.LongText
+  publishedAt     DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  metaDescription String?    @db.LongText
+  metaTitle       String?
+  category        Category[]
+  leads           Lead[]
+}
+
+model Category {
+  id             String       @id @default(cuid())
+  name           String
+  image          String?
+  weight         Float
+  price          Float
+  status         Int          @default(1)
+  publishedAt    DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  mainCategoryId String
+  weightType     String?      @default("Kg")
+  mainCategory   MainCategory @relation(fields: [mainCategoryId], references: [id])
+  orderItem      OrderItem[]
+
+  @@index([mainCategoryId], map: "Category_mainCategoryId_fkey")
+}
+
+model LeadLog {
+  id        String   @id @default(cuid())
+  leadId    String
+  status    String
+  message   String?
+  createdAt DateTime @default(now())
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId], map: "LeadLog_leadId_fkey")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId], map: "Account_userId_fkey")
+}
+
+model UniqueVisit {
+  id        String   @id @default(cuid())
+  ipAddress String
+  userAgent String?
+  visitedAt DateTime @default(now())
+  sessionId String?
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Session_userId_fkey")
+}
+
+model Blog {
+  id                   Int          @id @default(autoincrement())
+  title                String
+  slug                 String       @unique
+  content              String       @db.LongText
+  metaTitle            String?
+  metaDescription      String?
+  featuredImage        String?
+  featuredImageAltText String?
+  authorId             Int
+  publishedAt          DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+  status               String       @default("draft")
+  views                Int          @default(0)
+  likes                Int          @default(0)
+  icon                 String?      @db.LongText
+  tags                 BlogTag[]
+  comments             Comment[]
+  configs              ConfigBlog[]
+
+  @@map("Blog")
+}
+
+model Tag {
+  id    Int       @id @default(autoincrement())
+  name  String    @unique
+  blogs BlogTag[]
+
+  @@map("Tag")
+}
+
+model BlogTag {
+  blogId Int
+  tagId  Int
+  blog   Blog @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([blogId, tagId])
+  @@index([tagId], map: "BlogTag_tagId_fkey")
+  @@map("BlogTag")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  blogId    Int
+  userId    Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  @@index([blogId], map: "Comment_blogId_fkey")
+  @@map("Comment")
+}
+
+model Service {
+  id                   Int              @id @default(autoincrement())
+  title                String
+  slug                 String           @unique
+  content              String           @db.LongText
+  metaTitle            String?
+  metaDescription      String?
+  featuredImage        String?
+  featuredImageAltText String?
+  authorId             Int
+  publishedAt          DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  status               String           @default("draft")
+  views                Int              @default(0)
+  likes                Int              @default(0)
+  icon                 String?          @db.LongText
+  configs              ConfigService[]
+  comments             ServiceComment[]
+  tags                 ServiceTag[]
+
+  @@map("Service")
+}
+
+model SerTag {
+  id       Int          @id @default(autoincrement())
+  name     String       @unique
+  services ServiceTag[]
+
+  @@map("SerTag")
+}
+
+model ServiceTag {
+  serviceId Int
+  tagId     Int
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  tag       SerTag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([serviceId, tagId])
+  @@index([tagId], map: "ServiceTag_tagId_fkey")
+  @@map("ServiceTag")
+}
+
+model ServiceComment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  serviceId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([serviceId], map: "ServiceComment_serviceId_fkey")
+  @@map("ServiceComment")
+}
+
+model Config {
+  id                         Int             @id @default(autoincrement())
+  title                      String
+  description                String
+  og_image                   String?
+  og_title                   String?
+  og_description             String?
+  og_url                     String?
+  meta_keywords              String?
+  meta_description           String?
+  meta_author                String?
+  twitter_card               String?
+  twitter_site               String?
+  twitter_title              String?
+  twitter_description        String?
+  twitter_image              String?
+  whatsapp_number            String?
+  website_title              String
+  website_description        String
+  slogan                     String?
+  facebookLink               String?
+  twitterLink                String?
+  instagramLink              String?
+  linkdingLink               String?
+  bottomDescription          String?
+  createdAt                  DateTime        @default(now())
+  updatedAt                  DateTime        @default(now())
+  aboutPageContent           String?         @db.LongText
+  aboutPageMetaDescription   String?         @db.LongText
+  aboutPageMetaTitle         String?
+  bookingMetaPageDescription String?         @db.LongText
+  bookingMetaPageTitle       String?
+  blogs                      ConfigBlog[]
+  services                   ConfigService[]
+
+  @@map("Config")
+}
+
+model ConfigService {
+  configId  Int
+  serviceId Int
+  config    Config  @relation(fields: [configId], references: [id], onDelete: Cascade)
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([configId, serviceId])
+  @@index([serviceId], map: "ConfigService_serviceId_fkey")
+}
+
+model ConfigBlog {
+  configId Int
+  blogId   Int
+  blog     Blog   @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  config   Config @relation(fields: [configId], references: [id], onDelete: Cascade)
+
+  @@id([configId, blogId])
+  @@index([blogId], map: "ConfigBlog_blogId_fkey")
+}
+
+model ConfigSecond {
+  id                            Int      @id @default(autoincrement())
+  service_main_title            String?
+  service_main_description      String?
+  service_main_slogan           String?
+  about_us_main_title           String?
+  about_us_main_description     String?
+  about_us_button_text          String?
+  service_highlight_title       String?
+  service_highlight_description String?
+  service_highlight_button_text String?
+  service_button_text           String?
+  blog_main_title               String?
+  blog_main_slogan              String?
+  blog_main_description         String?
+  contact_us_title              String?
+  contact_us_slogan             String?
+  contact_us_address            String?
+  contact_us_full_address       String?
+  contact_us_main_title         String?
+  contact_us_email              String?
+  contact_us_phone_number       String?
+  created_at                    DateTime @default(now())
+  updatedAt                     DateTime @default(now())
+
+  @@map("ConfigSecond")
+}
+
+model Pages {
+  id         Int      @id @default(autoincrement())
+  title      String
+  slug       String   @unique
+  content    String   @db.LongText
+  created_at DateTime @default(now())
+  updatedAt  DateTime @default(now())
+}
+
+model Portfolio {
+  id              Int      @id @default(autoincrement())
+  title           String
+  slug            String   @unique
+  description     String
+  longDescription String   @db.LongText
+  image           String?
+  category        String
+  duration        String
+  client          String
+  website         String
+  contactPhone    String
+  contactEmail    String
+  iosAppLink      String?
+  androidAppLink  String?
+  fileLink        String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

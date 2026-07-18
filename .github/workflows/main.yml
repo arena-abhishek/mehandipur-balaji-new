@@ -1,0 +1,67 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main-code]
+  pull_request:
+    branches: [main-code]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # - uses: actions/checkout@v3
+      # - name: Use Node.js 18
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
+      #     cache: "npm"
+
+      # - run: npm install
+
+      - name: Deploy to Server via SSH
+        if: github.ref == 'refs/heads/main-code' && github.event_name == 'push'
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm use 18
+
+            cd ${{ secrets.SSH_TARGET_PATH }} || exit 1
+
+            # Git commit local changes before pull (optional safety)
+            git add .
+            git commit -m "Auto backup before pull - $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+
+            # Pull latest code and continue
+            git pull origin main-code && \
+            npm install --no-audit --no-fund && \
+            # ✅ Prisma commands (optional)
+            # npx prisma generate && \
+            # npx prisma db push && \
+            command -v pm2 >/dev/null 2>&1 || npm install -g pm2 && \
+            pm2 stop balaji-website || true && \
+            npm run build && \
+            (pm2 restart balaji-website || pm2 start npm --name "balaji-website" -- start ) && \
+            pm2 save
+
+      - name: Notify Telegram (Success)
+        if: success()
+        run: |
+          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+          -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+          -d text="✅ *Deployment Succeeded NGO WEBSite* on *${{ github.repository }}* (`${{ github.ref_name }}`)\nCommit: `${{ github.sha }}`" \
+          -d parse_mode=Markdown
+
+      - name: Notify Telegram (Failure)
+        if: failure()
+        run: |
+          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+          -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+          -d text="❌ *Deployment Failed* on NGO WEBSite*${{ github.repository }}* (`${{ github.ref_name }}`)\nCommit: `${{ github.sha }}`" \
+          -d parse_mode=Markdown
