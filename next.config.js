@@ -31,6 +31,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     missingSuspenseWithCSRBailout: false,
+    serverComponentsExternalPackages: ["bcrypt", "jsonwebtoken", "@prisma/client"],
   },
   // trailingSlash: true,
 };
