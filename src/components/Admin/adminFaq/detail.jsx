@@ -30,7 +30,7 @@ const PagesDetails = () => {
       console.log("Fetching blog data for slug:", slug); // Debug log to check slug before fetching
       const fetchBlog = async () => {
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/pages?slug=${slug}`);
+          const response = await fetch(`/api/pages?slug=${slug}`);
           if (!response.ok) {
             throw new Error("Failed to fetch blog details");
           }
@@ -93,7 +93,7 @@ const PagesDetails = () => {
           {blog.featuredImage && (
             <Image
 
-              src={`${process.env.NEXT_PUBLIC_API_URL}/api${blog.featuredImage}`}
+              src={`/api${blog.featuredImage}`}
 
               // src={blog.featuredImage}
               alt={blog.featuredImageAltText || blog.title}

@@ -45,7 +45,7 @@ const BlogCreateForm = () => {
   useEffect(() => {
     // Fetch existing blog data if we're in edit mode
     if (blogId) {
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog?slug=${blogId}`).then((response) => {
+      axios.get(`/api/blog?slug=${blogId}`).then((response) => {
         const blog = response.data.blog;
 
 
@@ -132,7 +132,7 @@ const BlogCreateForm = () => {
         formData.append("file", imageBlob, "featuredImage.jpg"); // Ensure correct file name and extension
       }
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`, formData, {
+      const response = await axios.post(`/api/blog`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

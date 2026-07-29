@@ -34,7 +34,7 @@ const SingleTestimonial = ({ testimonial }: { testimonial: Testimonial }) => {
 
         <div className="flex items-center gap-4">
           <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
-            <Image src={`${process.env.NEXT_PUBLIC_API_URL}/api${image}`}
+            <Image src={`/api${image}`}
               alt={name} width={50} height={50} />
           </div>
 

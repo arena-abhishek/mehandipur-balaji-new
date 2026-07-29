@@ -54,7 +54,7 @@ const ConfigForm = () => {
   useEffect(() => {
     // Fetch existing service data if we're in edit mode
     if (configId) {
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${configId}`).then((response) => {
+      axios.get(`/api/config?id=${configId}`).then((response) => {
         const config = response.data.config;
 
         // Ensure you're getting the complete service data
@@ -231,7 +231,7 @@ const ConfigForm = () => {
         formData.append("file", imageBlob, "featuredImage.jpg"); // Ensure correct file name and extension
       }
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/config`, formData, {
+      const response = await axios.post(`/api/config`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

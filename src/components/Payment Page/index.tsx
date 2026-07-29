@@ -44,7 +44,7 @@ const PaymentSuccess = () => {
       // };
 
       // const verifyResponse = await axios.post(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/api/verify-payment`,
+      //   `/api/verify-payment`,
       //   verifyPayload
       // );
 
@@ -57,7 +57,7 @@ const PaymentSuccess = () => {
       };
 
       const patchResponse = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/orders`,
+        `/api/orders`,
         patchPayload
       );
 

@@ -14,10 +14,10 @@ const httpsAgent = new https.Agent({ family: 4 });
 
 export async function getPostBySlug(slug: string, fields: string[] = []) {
   try {
-//    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/maincategory?slug=${slug}`);
+//    const response = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/maincategory?slug=${slug}`);
 
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/maincategory?slug=${slug}`,
+      `${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/maincategory?slug=${slug}`,
       {
         family: 4, // 🔥 Force IPv4 only on live server
       }
@@ -93,7 +93,7 @@ export async function getPostBySlug(slug: string, fields: string[] = []) {
 
 export async function getBlogs(slug: string, fields: string[] = []) {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog?slug=${slug}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/blog?slug=${slug}`);
 
     // Ensure you access the correct path based on your API response structure
     const blog = response.data.blog;
@@ -171,7 +171,7 @@ export async function getBlogs(slug: string, fields: string[] = []) {
 export async function pages(slug: string, fields: string[] = []) {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/pages?slug=${slug}`,
+      `${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/pages?slug=${slug}`,
       { httpsAgent }
     );
 
@@ -195,7 +195,7 @@ export async function pages(slug: string, fields: string[] = []) {
 
 export async function getAllPosts(fields: string[] = []) {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/blog`);
     const blogs = response.data.blogs;
 
     const posts = blogs.map((blog: any) => {
@@ -240,7 +240,7 @@ export async function getAllPosts(fields: string[] = []) {
 
 export async function getservice(fields: string[] = []) {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/service`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/service`);
     const service = response.data.services;
 
     const posts = service.map((blog: any) => {
@@ -289,7 +289,7 @@ export async function getservice(fields: string[] = []) {
 
 export async function getConfigData() {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`);
     const config = response.data.config;
 
     if (config) {
@@ -310,7 +310,7 @@ export async function getPostBySlugPortfolio(slug: string, fields: string[] = []
 
   try {
     // console.log("wht is this ");
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio?slug=${slug}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/portfolio?slug=${slug}`);
     const blog = response.data.portfolios[0];
 
     const items: { [key: string]: any } = {};

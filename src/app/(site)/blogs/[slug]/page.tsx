@@ -23,10 +23,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       openGraph: {
         title: "Blog Not Found",
         description: "The blog post you are looking for does not exist.",
-        url: `${process.env.NEXT_PUBLIC_API_URL}/blog/not-found`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || ""}/blog/not-found`,
         images: [
           {
-            url: `${process.env.NEXT_PUBLIC_API_URL}/default-image.jpg`,
+            url: `${process.env.NEXT_PUBLIC_SITE_URL || ""}/default-image.jpg`,
             width: 800,
             height: 600,
             alt: "Blog Not Found",

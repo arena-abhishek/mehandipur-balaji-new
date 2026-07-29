@@ -26,7 +26,7 @@ const TableOne = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/leads/`);
+      const response = await fetch(`/api/leads/`);
       const result = await response.json();
       setData(result.logs); // Update the state with the fetched logs
     } catch (error) {
@@ -41,7 +41,7 @@ const TableOne = () => {
 
   const updateStatus = async (leadId, newStatus) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/leads`, {
+      const response = await fetch(`/api/leads`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

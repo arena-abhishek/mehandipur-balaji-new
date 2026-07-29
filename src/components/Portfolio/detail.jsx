@@ -17,7 +17,7 @@ function Detail(slug) {
   // Fetch portfolio data based on the slug from the URL
   useEffect(() => {
     if (serviceSlug) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio?slug=${serviceSlug}`)
+      fetch(`/api/portfolio?slug=${serviceSlug}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.portfolios && data.portfolios.length > 0) {
@@ -62,7 +62,7 @@ function Detail(slug) {
               <Image
                 width={1000}
                 height={500}
-                src={`${process.env.NEXT_PUBLIC_API_URL}/api${portfolioData.image}`}
+                src={`/api${portfolioData.image}`}
 
                 // src={portfolioData.image}
                 alt={portfolioData.title}

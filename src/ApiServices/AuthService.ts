@@ -23,7 +23,7 @@ export interface AuthResponse {
 class AuthService {
   async register(userData: RegisterData): Promise<AuthResponse> {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/register`, userData);
+      const response = await axios.post(`/api/register`, userData);
       return response.data;
     } catch (error: any) {
       return {
@@ -35,12 +35,12 @@ class AuthService {
 
   async login(loginData: LoginData): Promise<AuthResponse> {
     // try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
+    const response = await fetch(`/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginData),
     });
-    // const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, loginData);
+    // const response = await axios.post(`/api/login`, loginData);
     const data = await response.json();
 
 
@@ -72,7 +72,7 @@ class AuthService {
 
   async verifyOTP(email: string, otp: string): Promise<AuthResponse> {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/verify`, { email, otp });
+      const response = await axios.post(`/api/verify`, { email, otp });
       return response.data;
     } catch (error: any) {
       return {
@@ -84,7 +84,7 @@ class AuthService {
 
   async resendOTP(email: string): Promise<AuthResponse> {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/resend-otp`, { email });
+      const response = await axios.post(`/api/resend-otp`, { email });
       return response.data;
     } catch (error: any) {
       return {

@@ -129,7 +129,7 @@ const OrderTable = () => {
       try {
         // Pass pagination parameters to your API endpoint if supported
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/orders?page=${pageIndex + 1}&limit=${pageSize}`
+          `/api/orders?page=${pageIndex + 1}&limit=${pageSize}`
         );
         const result = await response.json();
         setData(result.orders || []);

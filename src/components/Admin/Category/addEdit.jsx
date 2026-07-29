@@ -23,7 +23,7 @@ const CategoryCreateForm = () => {
   useEffect(() => {
     const fetchMainCategories = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/maincategory`);
+        const response = await axios.get(`/api/maincategory`);
         setMainCategories(response.data.services);
       } catch (error) {
         console.error("Error fetching main categories:", error);
@@ -36,7 +36,7 @@ const CategoryCreateForm = () => {
   useEffect(() => {
     if (CategoryId) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/api/category?id=${CategoryId}`)
+        .get(`/api/category?id=${CategoryId}`)
         .then((response) => {
           const category = response.data.Category;
 
@@ -106,7 +106,7 @@ const CategoryCreateForm = () => {
         }
       }
 
-      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/category`;
+      const apiUrl = `/api/category`;
 
       const response = await axios.post(apiUrl, formData, {
         headers: { "Content-Type": "multipart/form-data" },

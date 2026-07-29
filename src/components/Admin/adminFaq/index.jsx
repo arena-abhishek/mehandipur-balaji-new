@@ -134,7 +134,7 @@ const FAQTable = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this service?");
     if (confirmDelete) {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/faq?id=${id}`, {
+        const response = await fetch(`/api/faq?id=${id}`, {
           method: "DELETE",
         });
 
@@ -160,7 +160,7 @@ const FAQTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/faq`);
+        const response = await fetch(`/api/faq`);
         const result = await response.json();
         setData(result.faqs || []);
       } catch (error) {

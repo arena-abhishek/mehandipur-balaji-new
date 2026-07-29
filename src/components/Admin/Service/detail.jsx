@@ -26,7 +26,7 @@ const ServiceDetailAdminPage = () => {
     if (slug) {
       const fetchService = async () => {
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/maincategory?slug=${slug}`);
+          const response = await fetch(`/api/maincategory?slug=${slug}`);
           if (!response.ok) {
             throw new Error("Failed to fetch service details");
           }
@@ -115,7 +115,7 @@ const ServiceDetailAdminPage = () => {
             {service.featuredImage && (
               <div className="relative w-full h-[400px] mt-8 rounded-lg overflow-hidden">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/api${service.featuredImage}`}
+                  src={`/api${service.featuredImage}`}
 
                   // src={service.featuredImage}
                   alt={service.featuredImageAltText || service.title}

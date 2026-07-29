@@ -54,7 +54,7 @@ const ConfigForm2 = () => {
   useEffect(() => {
     if (configId) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${configId}`)
+        .get(`/api/config?id=${configId}`)
         .then((response) => {
           const config = response.data.config;
           if (config) setConfig(config);
@@ -82,7 +82,7 @@ const ConfigForm2 = () => {
       formData.append("id", configId || "1");
 
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/config`,
+        `/api/config`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

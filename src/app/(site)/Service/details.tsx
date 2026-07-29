@@ -144,7 +144,7 @@ const BookingDetails: React.FC<{ bookingData: any }> = ({ bookingData }) => {
   //     paymentDate: new Date().toISOString()
   //   };
 
-  //   const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`, orderPayload, {
+  //   const response = await axios.post(`/api/orders`, orderPayload, {
   //     headers: { 'Content-Type': 'application/json' }
   //   });
 
@@ -178,7 +178,7 @@ const BookingDetails: React.FC<{ bookingData: any }> = ({ bookingData }) => {
 
     // 🚀 Now call the API here
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`, {
+      const response = await fetch(`/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -236,9 +236,9 @@ const BookingDetails: React.FC<{ bookingData: any }> = ({ bookingData }) => {
             {/* Responsive Image Section */}
             <div className="w-full md:w-1/4 h-[200px] md:h-[250px] relative rounded-lg overflow-hidden">
               <img
-                src={`${process.env.NEXT_PUBLIC_API_URL}/api${bookingData.coverImage}`}
+                src={`/api${bookingData.coverImage}`}
 
-                // src={`${process.env.NEXT_PUBLIC_API_URL}/${bookingData.coverImage}`}
+                // src={`/${bookingData.coverImage}`}
                 alt={bookingData.name}
                 className="w-full h-full object-cover rounded-lg shadow-md"
               />
@@ -264,7 +264,7 @@ const BookingDetails: React.FC<{ bookingData: any }> = ({ bookingData }) => {
               >
                 <div className="flex-shrink-0">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/api${service.image}`}
+                    src={`/api${service.image}`}
 
                     // src={service.image}
                     alt={service.name}

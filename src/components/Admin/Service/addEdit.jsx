@@ -25,7 +25,7 @@ const ServiceCreateUpdate = () => {
   useEffect(() => {
     // Fetch existing service data if we're in edit mode
     if (serviceId) {
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/maincategory?slug=${serviceId}`).then((response) => {
+      axios.get(`/api/maincategory?slug=${serviceId}`).then((response) => {
         const service = response.data.Service;
 
         // Ensure you're getting the complete service data
@@ -107,7 +107,7 @@ const ServiceCreateUpdate = () => {
         formData.append("file", imageBlob, "featuredImage.jpg"); // Ensure correct file name and extension
       }
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/maincategory`, formData, {
+      const response = await axios.post(`/api/maincategory`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

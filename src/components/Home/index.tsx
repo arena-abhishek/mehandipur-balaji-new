@@ -12,7 +12,6 @@ import HeroSection from "../Hero";
 import HomeBlogSection from "../Blog_pre/HomeBlogSection";
 import PreLoader from "../Common/PreLoader";
 import { Config } from "@/types/Home";
-import { log } from "console";
 import { useGlobalConfig } from "@/types/GlobalConfigContext";
 import Gallery from "../Gallery";
 import BlogCards from "../Blogs";
@@ -42,7 +41,7 @@ export default function HomeComponet() {
     const fetchConfig = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`
+          `/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`
         );
 
         if (response.data && response.data.config) {

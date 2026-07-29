@@ -38,7 +38,7 @@ const BlogTable = () => {
         info.getValue() ? (
           <div className="w-12 h-12 relative">
             <img
-              src={`${process.env.NEXT_PUBLIC_API_URL}/api${info.getValue()}`}
+              src={`/api${info.getValue()}`}
               width={100}
               height={100}
               // src={/info.getValue()}
@@ -135,7 +135,7 @@ const BlogTable = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this service?");
     if (confirmDelete) {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog?id=${id}`, {
+        const response = await fetch(`/api/blog?id=${id}`, {
           method: "DELETE",
         });
 
@@ -161,7 +161,7 @@ const BlogTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`);
+        const response = await fetch(`/api/blog`);
         const result = await response.json();
         setData(result.blogs || []);
       } catch (error) {

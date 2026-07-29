@@ -18,7 +18,7 @@ const Faq = () => {
   useEffect(() => {
     const fetchFaqs = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/faq`);
+        const response = await axios.get(`/api/faq`);
         setFaqs(response.data.faqs);
       } catch (error) {
         console.error("Error fetching FAQs:", error);

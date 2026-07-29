@@ -50,7 +50,7 @@ const HeroSection = ({ existingConfigData, mainCat }) => {
 
       console.log("Submitting payload:", payload);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/leads`, {
+      const response = await fetch(`/api/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

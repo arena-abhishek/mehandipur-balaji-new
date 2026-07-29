@@ -12,7 +12,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
         <Link href={`/blogs/${slug}`} aria-label="blog cover" className="block">
           <div className="relative w-full h-[272px]">
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}/api${coverImage != null ? coverImage : featuredImage}`}
+              src={`/api${coverImage != null ? coverImage : featuredImage}`}
 
               // src={coverImage !=null?coverImage:featuredImage }
               alt="image"

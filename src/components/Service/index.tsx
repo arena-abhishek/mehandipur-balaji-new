@@ -21,7 +21,7 @@ const OurServices = () => {
         const fetchConfig = async () => {
             try {
                 const response = await axios.get(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`
+                    `/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`
                 );
 
 
@@ -117,7 +117,7 @@ const OurServices = () => {
                                     <div className="relative w-72 h-40 overflow-hidden mb-6 shadow-md rounded-lg">
                                         {/* ✅ Rectangle image with border radius */}
                                         {/* <img
-                                            src={`${process.env.NEXT_PUBLIC_API_URL}/api${service.image}`}
+                                            src={`/api${service.image}`}
 
                                             // src={service.image}
                                             alt={`${service.name} icon`}
@@ -126,7 +126,7 @@ const OurServices = () => {
                                             style={{ objectFit: 'cover' }}
                                         /> */}
                                         <img
-                                            src={`${process.env.NEXT_PUBLIC_API_URL}/api${service.image}`}
+                                            src={`/api${service.image}`}
                                             alt={`${service.name} icon`}
                                             width={288}
                                             height={160}

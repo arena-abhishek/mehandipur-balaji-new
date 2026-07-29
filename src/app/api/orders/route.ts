@@ -123,7 +123,7 @@ export const PUT = async (req: NextRequest) => {
           type: "PG_CHECKOUT",
           message: "Order Payment",
           merchantUrls: {
-            redirectUrl: `${process.env.NEXT_PUBLIC_API_URL}/payment?payment_id=${order.transactionId}`,
+            redirectUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/payment?payment_id=${order.transactionId}`,
           },
           paymentModeConfig: {
             enabledPaymentModes: [

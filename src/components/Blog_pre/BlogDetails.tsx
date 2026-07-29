@@ -28,7 +28,7 @@ const BlogDetails: React.FC<BlogDetailsProps> = ({ title, content, coverImage, p
                 data-wow-delay=".1s"
               >
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/api${coverImage}`}
+                  src={`/api${coverImage}`}
                   alt={title}
                   width={1288}
                   height={800}

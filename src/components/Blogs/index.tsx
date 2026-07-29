@@ -31,7 +31,7 @@ const BlogCards: React.FC<BlogCardsProps> = ({ maxLength = 150, maxBlogs }) => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`);
+        const response = await axios.get(`/api/blog`);
         const apiBlogs = response.data.blogs.map((blog: any) => ({
           id: blog.id,
           title: blog.title,
@@ -125,7 +125,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, maxLength }) => {
       >
         <div className="relative h-48 w-full overflow-hidden">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}/api${blog.featuredImage}`}
+            src={`/api${blog.featuredImage}`}
 
             // src={blog.featuredImage}
             alt={blog.title}

@@ -21,7 +21,7 @@ const PageCreateForm = () => {
   useEffect(() => {
     if (blogId) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/api/pages?slug=${blogId}`)
+        .get(`/api/pages?slug=${blogId}`)
         .then((response) => {
           const blog = response.data.page;
           if (blog) {
@@ -59,7 +59,7 @@ const PageCreateForm = () => {
         formData.append("id", existingBlogData.id);
       }
 
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/pages`, formData, {
+      await axios.post(`/api/pages`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

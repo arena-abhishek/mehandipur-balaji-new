@@ -298,7 +298,7 @@ export const GET = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
 
-    // const visitorResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trackvisitor`, {
+    // const visitorResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/trackvisitor`, {
     //   method: "GET",
     // });
 

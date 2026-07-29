@@ -130,7 +130,7 @@ const PagesTable = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this service?");
     if (confirmDelete) {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/pages?id=${id}`, {
+        const response = await fetch(`/api/pages?id=${id}`, {
           method: "DELETE",
         });
 
@@ -156,7 +156,7 @@ const PagesTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/pages`);
+        const response = await fetch(`/api/pages`);
         const result = await response.json();
         setData(result.pages || []);
       } catch (error) {

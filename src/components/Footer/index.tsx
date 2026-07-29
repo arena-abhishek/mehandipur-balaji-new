@@ -29,7 +29,7 @@ export default function Footer({ mainCategory }: FooterProps) {
     const fetchConfig = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`
+          `/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`
         );
 
 
@@ -106,7 +106,7 @@ export default function Footer({ mainCategory }: FooterProps) {
 
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/leads`, {
+        const response = await fetch(`/api/leads`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),

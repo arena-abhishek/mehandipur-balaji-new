@@ -11,7 +11,7 @@ const PortfolioShowcase = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio`);
+        const response = await fetch(`/api/portfolio`);
         const data = await response.json();
         setProjects(data.portfolios); // Update the state with the portfolio data
       } catch (error) {
@@ -38,7 +38,7 @@ const PortfolioShowcase = () => {
                   <Image
                     width={100}
                     height={100}
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/api${project.image}`}
+                    src={`/api${project.image}`}
 
                     // src={project.image}
                     alt={project.title}

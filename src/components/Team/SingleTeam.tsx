@@ -10,7 +10,7 @@ const SingleTeam = ({ team }: { team: TeamType }) => {
         <div className="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
           <Image
             // src={image}
-            src={`${process.env.NEXT_PUBLIC_API_URL}/api${image}`}
+            src={`/api${image}`}
 
             alt={name}
             className="w-full rounded-full"

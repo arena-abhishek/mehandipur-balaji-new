@@ -15,7 +15,7 @@ const PopularArticle = (props: {
       >
         <div className={`mr-5 overflow-hidden rounded`}>
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}/api${image}`}
+            src={`/api${image}`}
 
             // src={image}
             alt="image"

@@ -40,7 +40,7 @@ const CategoryTable = () => {
         info.getValue() ? (
           <div className="w-12 h-12 relative">
             <img
-              src={`${process.env.NEXT_PUBLIC_API_URL}/api${info.getValue()}`}
+              src={`/api${info.getValue()}`}
               width={100}
               height={100}
 
@@ -151,7 +151,7 @@ const CategoryTable = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this Category?");
     if (confirmDelete) {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category?id=${id}`, {
+        const response = await fetch(`/api/category?id=${id}`, {
           method: "DELETE",
         });
 
@@ -173,7 +173,7 @@ const CategoryTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category`);
+        const response = await fetch(`/api/category`);
         const result = await response.json();
         // console.log("call api");
         setData(result.categories || []);

@@ -31,7 +31,7 @@ const ServiceTable = () => {
           <div className="hidden sm:block w-12 h-12 relative">
             <img
 
-              src={`${process.env.NEXT_PUBLIC_API_URL}/api${info.getValue()}`}
+              src={`/api${info.getValue()}`}
 
 
               // src={info.getValue()}
@@ -90,7 +90,7 @@ const ServiceTable = () => {
 
         //     formData.append("authorId", 11); // Replace with dynamic author ID if applicable
 
-        //     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/service`, formData, {
+        //     const response = await axios.post(`/api/service`, formData, {
         //       headers: { "Content-Type": "multipart/form-data" },
         //     });
 
@@ -198,7 +198,7 @@ const ServiceTable = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this service?");
     if (confirmDelete) {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/maincategory?id=${id}`, {
+        const response = await fetch(`/api/maincategory?id=${id}`, {
           method: "DELETE",
         });
 
@@ -224,7 +224,7 @@ const ServiceTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/maincategory`);
+        const response = await fetch(`/api/maincategory`);
         const result = await response.json();
         if (result?.services) {
           setData(result.services);

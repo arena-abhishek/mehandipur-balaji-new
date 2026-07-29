@@ -13,7 +13,7 @@ const WebsiteBlogService = () => {
 
   useEffect(() => {
     // Fetch the config data
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`)
+    axios.get(`/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`)
       .then((response) => {
         const configData = response.data.config;
         setConfig(configData); // Set config data
@@ -29,11 +29,11 @@ const WebsiteBlogService = () => {
         });
 
         // Fetch blogs and services
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`)
+        axios.get(`/api/blog`)
           .then((blogResponse) => setBlogs(blogResponse.data.blogs))
           .catch((error) => console.error("Error fetching blogs:", error));
 
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/service`)
+        axios.get(`/api/service`)
           .then((serviceResponse) => setServices(serviceResponse.data.services))
           .catch((error) => console.error("Error fetching services:", error));
       })
@@ -48,7 +48,7 @@ const WebsiteBlogService = () => {
       formData.append("services", values.services.join(","));
 
       // Submit the form data via PUT request
-      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/config`, formData, {
+      const response = await axios.put(`/api/config`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

@@ -129,7 +129,7 @@ export const BookingForm: React.FC<bookingProps> = ({ id }) => {
     const fetchUserData = async (email: string) => {
         try {
             // Construct the API URL
-            const url = `${process.env.NEXT_PUBLIC_API_URL}/api/user-order?email=${email}&ordershow=false`;
+            const url = `/api/user-order?email=${email}&ordershow=false`;
 
             const response = await fetch(url);
 
@@ -253,7 +253,7 @@ export const BookingForm: React.FC<bookingProps> = ({ id }) => {
             };
 
             const response = await axios.put(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/orders`,
+                `/api/orders`,
                 orderPayload,
                 { headers: { 'Content-Type': 'application/json' } }
             );

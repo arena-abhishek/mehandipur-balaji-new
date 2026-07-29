@@ -21,10 +21,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: `${title} - Mandipur balaji`,
       description: `Learn more about ${title} on Mehandipur Balaji Sawamani`,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/${params.slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL || ""}/${params.slug}`,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_API_URL}/default-image.jpg`,
+          url: `${process.env.NEXT_PUBLIC_SITE_URL || ""}/default-image.jpg`,
           width: 1200,
           height: 630,
           alt: `${title} Cover Image`,

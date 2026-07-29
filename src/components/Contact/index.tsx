@@ -57,7 +57,7 @@ const Contact: React.FC<ContactProps> = ({ isShowText, mainCat }) => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`);
+      const response = await axios.get(`/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`);
       if (response.data?.mainCategory) {
         const blogPosts = response.data.config.blogs.map((entry: any) => entry.blog);
         const blogPosts2 = response.data.config.services.map((entry: any) => entry.service);
@@ -128,7 +128,7 @@ const Contact: React.FC<ContactProps> = ({ isShowText, mainCat }) => {
 
       console.log('Submitting payload:', payload);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/leads`, {
+      const response = await fetch(`/api/leads`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

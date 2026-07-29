@@ -7,7 +7,7 @@ import { Metadata } from "next";
 export async function generateMetadata({ }): Promise<Metadata> {
   try {
     // Fetching dynamic data (replace with your API endpoint)
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL || ""}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`);
     const data = response.data.config;
 
     // console.log("Fetched Metadata:", data);

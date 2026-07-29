@@ -21,7 +21,7 @@ const PageCreateForm = () => {
   useEffect(() => {
     if (blogId) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/api/faq?id=${blogId}`)
+        .get(`/api/faq?id=${blogId}`)
         .then((response) => {
           const blog = response.data.faq;
           if (blog) {
@@ -59,7 +59,7 @@ const PageCreateForm = () => {
         payload.id = existingBlogData.id;
       }
 
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/faq`, payload, {
+      await axios.post(`/api/faq`, payload, {
         headers: { "Content-Type": "application/json" },
       });
 

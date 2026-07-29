@@ -142,7 +142,7 @@ const UserTable = () => {
 
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/users?page=${pageIndex + 1
+          `/api/users?page=${pageIndex + 1
           }&limit=${pageSize}&search=${debouncedSearch}`
         );
 

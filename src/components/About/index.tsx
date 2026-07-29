@@ -11,7 +11,7 @@ const About = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`);
+        const response = await axios.get(`/api/config?id=${process.env.NEXT_PUBLIC_CONFIG_ID}`);
         const data = response.data?.config;
 
         if (data && data.aboutPageContent) {
