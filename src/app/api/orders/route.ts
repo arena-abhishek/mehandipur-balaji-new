@@ -551,7 +551,7 @@ export const PATCH = async (req: NextRequest) => {
       const emailData = {
         sender: {
           name: "Mehandipur Balaji",
-          email: "techpiyushkhatri@gmail.com"
+          email: "rameshsainimehandipur@gmail.com"
         },
         cc: [
           // {

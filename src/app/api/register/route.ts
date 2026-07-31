@@ -47,7 +47,7 @@ export async function POST(request: any) {
   const emailData = {
     sender: {
       name: "Mehandipur Balaji",
-      email: "techpiyushkhatri@gmail.com"
+      email: "rameshsainimehandipur@gmail.com"
     },
     to: [
       {
