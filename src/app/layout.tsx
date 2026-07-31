@@ -97,7 +97,7 @@ By Mehandipur Balaji Sawamani Online Booking, You Can Ensure a Hassle-Free Exper
                     "text": `For Sawamani Online Booking and Other Services, Please Use the Contact Details Provided Below. 
 📞 Contact Number: +91 8559833140
 📧 Email: Info@mahandipurbalaji.in
-🏠 Address: Shiv Misthan Bhandar, Shop Number 6.b, Mehandipur Balaji Ram Mandir Wali Line, Dausa, Rajasthan`
+🏠 Address: Shree Shiv Misthan Bhandar, Shop Number 1.b, Mehandipur Balaji Ram Mandir Wali Line, Dausa, Rajasthan`
                   }
                 },
                 {

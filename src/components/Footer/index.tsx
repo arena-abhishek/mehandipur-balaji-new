@@ -147,7 +147,7 @@ export default function Footer({ mainCategory }: FooterProps) {
                 rel="noopener noreferrer"
                 className="block mt-2 text-white-700 hover:text-white-500 transition-colors duration-300 underline decoration-orange-500 hover:decoration-orange-700"
               >
-                Shiv Misthan Bhandar, shop number 6.B,<br />
+                Shree Shiv Misthan Bhandar, shop number 1.B,<br />
                 Mehandipur Balaji Ram Mandir wali line,<br />
                 Dausa, Rajasthan
               </a>

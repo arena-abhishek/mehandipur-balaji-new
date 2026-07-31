@@ -189,7 +189,7 @@ const Contact: React.FC<ContactProps> = ({ isShowText, mainCat }) => {
                         rel="noopener noreferrer"
                         className="block mt-1 text-gray-600 underline hover:text-orange-500 transition-all duration-300"
                       >
-                        Shiv Misthan Bhandar, shop number 6.B,
+                        Shree Shiv Misthan Bhandar, shop number 1.B,
                         Mehandipur Balaji Ram Mandir wali line,
                         Dausa, Rajasthan
                       </a>
