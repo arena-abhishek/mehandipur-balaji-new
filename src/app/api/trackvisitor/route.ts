@@ -3,6 +3,8 @@ import { prisma } from "@/utils/prismaDB";
 import { getClientIp } from "request-ip";
 import { v4 as uuidv4 } from "uuid";
 
+export const dynamic = "force-dynamic";
+
 export const GET = async (req: NextRequest) => {
 
 
