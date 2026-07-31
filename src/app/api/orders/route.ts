@@ -511,7 +511,6 @@ export const PATCH = async (req: NextRequest) => {
 
       const adminEmails = [
         // "olaf.trygve@thefluent.org"
-        "Piyushkalra816@gmail.com",
         "rameshsainimehandipur@gmail.com"
 
       ];
@@ -559,10 +558,6 @@ export const PATCH = async (req: NextRequest) => {
           //   email: "piyushkhatri9024@gmail.com", // customer's email
           //   name: "Piyushkalra816"    // customer's name
           // }
-          {
-            email: "Piyushkalra816@gmail.com", // customer's email
-            name: "Piyushkalra816"    // customer's name
-          },
           {
             email: "rameshsainimehandipur@gmail.com", // customer's email
             name: "rameshsainimehandipur ji"    // customer's name
